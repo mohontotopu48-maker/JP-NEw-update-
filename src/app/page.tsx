@@ -26,6 +26,10 @@ import {
   Eye,
   BadgeCheck,
   Search,
+  DollarSign,
+  Wrench,
+  Droplets,
+  Layers,
 } from 'lucide-react'
 
 /* ── colour tokens ── */
@@ -162,7 +166,7 @@ function Header() {
             714-936-7013
           </a>
           <a
-            href="#"
+            href="#assessment"
             className="px-5 py-2.5 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)]"
             style={{ background: TEAL }}
           >
@@ -213,7 +217,7 @@ function Header() {
                   <Phone size={15} /> 714-936-7013
                 </a>
                 <a
-                  href="#"
+                  href="#assessment"
                   className="block text-center px-5 py-3 rounded-full text-sm font-semibold text-white"
                   style={{ background: TEAL }}
                 >
@@ -257,7 +261,7 @@ function Hero() {
 
             <motion.div {...fadeUp(0.2)} className="mt-8">
               <a
-                href="#"
+                href="#assessment"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)]"
                 style={{ background: TEAL }}
               >
@@ -514,7 +518,7 @@ function HowItWorks() {
         {/* Bottom CTA */}
         <motion.div {...fadeUp(0.4)} className="mt-16 text-center">
           <a
-            href="#"
+            href="#assessment"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)]"
             style={{ background: TEAL }}
           >
@@ -548,7 +552,7 @@ function PreFooterCTA() {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="#"
+              href="#assessment"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)]"
               style={{ background: TEAL }}
             >
@@ -659,7 +663,7 @@ function Footer() {
               714-936-7013
             </a>
             <a
-              href="#"
+              href="#assessment"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,201,167,.5)]"
               style={{ background: TEAL }}
             >
@@ -727,6 +731,122 @@ function Footer() {
 }
 
 /* ════════════════════════════════════════════════════════════════
+   6. FREE STUCCO ASSESSMENT — PRICING CARDS
+   ════════════════════════════════════════════════════════════════ */
+function Assessment() {
+  const [selected, setSelected] = useState<string | null>(null)
+
+  const services = [
+    {
+      id: 'single-patch',
+      title: 'Single Area Patch',
+      description: 'Small cracks, chips, or isolated damage',
+      price: '$650+',
+      icon: <Wrench size={24} />,
+    },
+    {
+      id: 'multiple-repairs',
+      title: 'Multiple Repairs',
+      description: 'Multiple cracks or larger damage areas',
+      price: '$998+',
+      icon: <Layers size={24} />,
+    },
+    {
+      id: 're-stucco',
+      title: 'Re-Stucco',
+      description: 'Full exterior stucco replacement',
+      price: '$14,800+',
+      icon: <HomeIcon size={24} />,
+    },
+    {
+      id: 'weep-screed',
+      title: 'Weep Screed Replacement',
+      description: 'Moisture protection repair or replacement',
+      price: '$1,398+',
+      icon: <Droplets size={24} />,
+    },
+  ]
+
+  return (
+    <section id="assessment" className="py-20 md:py-28 bg-gray-50 relative overflow-hidden scroll-mt-24">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-[#00C9A7]/[0.04] blur-[120px]" />
+        <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-[#0A2540]/[0.03] blur-[100px]" />
+      </div>
+
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
+        {/* Header */}
+        <motion.div {...fadeUp()} className="text-center mb-12">
+          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4" style={{ background: `${TEAL}15`, color: TEAL }}>
+            Transparent Pricing
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold" style={{ color: OCEAN }}>
+            Get Your Free Stucco Assessment
+          </h2>
+          <p className="mt-4 text-gray-500 text-lg max-w-xl mx-auto">
+            Select your service to see pricing and book a free walkthrough.
+          </p>
+        </motion.div>
+
+        {/* 2×2 Pricing Cards */}
+        <div className="grid sm:grid-cols-2 gap-5 lg:gap-6">
+          {services.map((svc, i) => (
+            <motion.div
+              key={svc.id}
+              {...fadeUp(i * 0.1)}
+              onClick={() => setSelected(svc.id)}
+              className={`relative cursor-pointer rounded-2xl bg-white p-7 shadow-sm border-2 transition-all duration-300 group hover:shadow-lg ${
+                selected === svc.id
+                  ? 'border-[#00C9A7] shadow-lg shadow-[#00C9A7]/10'
+                  : 'border-gray-100 hover:border-[#00C9A7]/30'
+              }`}
+            >
+              {/* Selected checkmark */}
+              {selected === svc.id && (
+                <div className="absolute top-4 right-4 w-7 h-7 rounded-full flex items-center justify-center" style={{ background: TEAL }}>
+                  <CheckCircle2 size={16} className="text-white" />
+                </div>
+              )}
+
+              {/* Icon */}
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-colors duration-300 ${
+                selected === svc.id ? 'text-white' : ''
+              }`}
+                style={{ background: selected === svc.id ? TEAL : `${TEAL}10`, color: selected === svc.id ? '#fff' : TEAL }}
+              >
+                {svc.icon}
+              </div>
+
+              {/* Title */}
+              <h3 className="text-lg font-bold mb-1" style={{ color: OCEAN }}>{svc.title}</h3>
+
+              {/* Description */}
+              <p className="text-gray-500 text-sm mb-4">{svc.description}</p>
+
+              {/* Price */}
+              <div className="text-2xl font-extrabold" style={{ color: TEAL }}>{svc.price}</div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Book Walkthrough CTA */}
+        <motion.div {...fadeUp(0.4)} className="mt-10 text-center">
+          <a
+            href="tel:7149367013"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)]"
+            style={{ background: TEAL }}
+          >
+            <Phone size={18} />
+            Book Free Walkthrough — 714-936-7013
+          </a>
+          <p className="mt-4 text-sm text-gray-400">Select a service above · No hidden fees · Fixed-price estimates</p>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+/* ════════════════════════════════════════════════════════════════
    PAGE COMPOSITION
    ════════════════════════════════════════════════════════════════ */
 export default function Home() {
@@ -737,6 +857,7 @@ export default function Home() {
         <Hero />
         <HiddenDanger />
         <HowItWorks />
+        <Assessment />
         <PreFooterCTA />
       </main>
       <Footer />
