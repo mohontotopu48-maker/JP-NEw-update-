@@ -111,9 +111,8 @@ function Header() {
 
           {/* Services dropdown */}
           <div ref={servicesRef} className="relative">
-            <a
-              href="#patching-services"
-              onClick={() => { setServicesOpen(false); setActiveLink('Services') }}
+            <button
+              onClick={() => { setServicesOpen(!servicesOpen); setActiveLink('Services') }}
               className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeLink === 'Services'
                   ? 'text-[#00C9A7]'
@@ -122,7 +121,37 @@ function Header() {
               style={activeLink === 'Services' ? { textShadow: TEAL_GLOW } : undefined}
             >
               Services
-            </a>
+              <ChevronDown size={14} className={`transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            <AnimatePresence>
+              {servicesOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full right-0 mt-2 w-60 rounded-xl bg-white shadow-2xl border border-gray-100 overflow-hidden"
+                >
+                  {[
+                    { label: 'Stucco Repair', href: '#patching-services' },
+                    { label: 'Stucco Patches', href: '#patching-services' },
+                    { label: 'Weep Screed Repair', href: '#assessment' },
+                    { label: 'Smooth Stucco', href: '#patching-services' },
+                  ].map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setServicesOpen(false)}
+                      className="flex items-center gap-2 px-5 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#00C9A7] transition-colors"
+                    >
+                      <CheckCircle2 size={14} className="text-[#00C9A7]" />
+                      {item.label}
+                    </a>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </nav>
 
@@ -170,13 +199,40 @@ function Header() {
                   {link}
                 </button>
               ))}
-              <a
-                href="#patching-services"
-                onClick={() => setMobileOpen(false)}
-                className="block w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-white/80 hover:text-[#00C9A7]"
+              <button
+                onClick={() => setServicesOpen(!servicesOpen)}
+                className="block w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-white/80 hover:text-[#00C9A7] flex items-center gap-1"
               >
                 Services
-              </a>
+                <ChevronDown size={14} className={`transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
+              </button>
+              <AnimatePresence>
+                {servicesOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden"
+                  >
+                    {[
+                      { label: 'Stucco Repair', href: '#patching-services' },
+                      { label: 'Stucco Patches', href: '#patching-services' },
+                      { label: 'Weep Screed Repair', href: '#assessment' },
+                      { label: 'Smooth Stucco', href: '#patching-services' },
+                    ].map((item) => (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        onClick={() => { setMobileOpen(false); setServicesOpen(false) }}
+                        className="block pl-8 py-2 text-sm text-white/60 hover:text-[#00C9A7] transition-colors"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
               <div className="pt-3 border-t border-white/10 space-y-3">
                 <a href="tel:7149367013" className="flex items-center gap-2 text-white font-bold text-sm px-4">
                   <Phone size={15} /> 714-936-7013
