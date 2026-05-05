@@ -729,7 +729,7 @@ function Footer() {
             <div className="leading-tight text-center sm:text-right">
               <span>Powered by </span><span className="text-[#00C9A7] font-semibold">NXLBYLDR CRM</span>
               <br />
-              <span>managed by </span><span>VSUALdigitalmedia.com</span>
+              <span>managed by </span><a href="https://vsualdigitalmedia.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors">VSUALdigitalmedia.com</a>
             </div>
           </div>
         </div>
