@@ -607,10 +607,6 @@ function Footer() {
                 </a>
               ))}
             </div>
-            <p className="text-white/50 text-sm leading-relaxed mb-4">
-              1100 Newport Center Dr, Suite 100<br />
-              Newport Beach, CA 92660
-            </p>
             {/* Serving badge */}
             <div className="flex items-center gap-2">
               <MapPin size={16} style={{ color: TEAL }} />
