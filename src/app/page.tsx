@@ -717,12 +717,20 @@ function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40">
+        <div className="border-t border-white/10 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
           <span>© {new Date().getFullYear()} JP Stucco Repair. All rights reserved.</span>
-          <div className="flex gap-4">
-            <a href="#" className="hover:text-white/70 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white/70 transition-colors">Terms</a>
-            <a href="#" className="hover:text-white/70 transition-colors">Sitemap</a>
+          <div className="flex items-center gap-6">
+            <div className="flex gap-4">
+              <a href="#" className="hover:text-white/70 transition-colors">Privacy</a>
+              <a href="#" className="hover:text-white/70 transition-colors">Terms</a>
+              <a href="#" className="hover:text-white/70 transition-colors">Sitemap</a>
+            </div>
+            <span className="hidden sm:block text-white/20">|</span>
+            <div className="leading-tight text-center sm:text-right">
+              <span>Powered by </span><span className="text-[#00C9A7] font-semibold">NXLBYLDR CRM</span>
+              <br />
+              <span>managed by </span><span>VSUALdigitalmedia.com</span>
+            </div>
           </div>
         </div>
       </div>
