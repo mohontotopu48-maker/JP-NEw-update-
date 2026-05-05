@@ -134,10 +134,9 @@ function Header() {
                   className="absolute top-full right-0 mt-2 w-60 rounded-xl bg-white shadow-2xl border border-gray-100 overflow-hidden"
                 >
                   {[
-                    { label: 'Stucco Repair', href: '#patching-services' },
-                    { label: 'Stucco Patches', href: '#patching-services' },
-                    { label: 'Weep Screed Repair', href: '#assessment' },
-                    { label: 'Smooth Stucco', href: '#patching-services' },
+                    { label: 'Stucco Repair', href: '#hero' },
+                    { label: 'Stucco Patches', href: '#patching' },
+                    { label: 'Weep Screed Repair', href: '#weep-screed' },
                   ].map((item) => (
                     <a
                       key={item.label}
@@ -216,10 +215,9 @@ function Header() {
                     className="overflow-hidden"
                   >
                     {[
-                      { label: 'Stucco Repair', href: '#patching-services' },
-                      { label: 'Stucco Patches', href: '#patching-services' },
-                      { label: 'Weep Screed Repair', href: '#assessment' },
-                      { label: 'Smooth Stucco', href: '#patching-services' },
+                      { label: 'Stucco Repair', href: '#hero' },
+                      { label: 'Stucco Patches', href: '#patching' },
+                      { label: 'Weep Screed Repair', href: '#weep-screed' },
                     ].map((item) => (
                       <a
                         key={item.label}
@@ -258,7 +256,7 @@ function Header() {
    ════════════════════════════════════════════════════════════════ */
 function Hero() {
   return (
-    <section className="relative pt-28 md:pt-36 pb-16 md:pb-24 bg-white overflow-hidden">
+    <section id="hero" className="relative pt-28 md:pt-36 pb-16 md:pb-24 bg-white overflow-hidden scroll-mt-24">
       {/* Decorative blurs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[#00C9A7]/5 blur-[120px]" />
@@ -573,7 +571,7 @@ function PatchingServices() {
   ]
 
   return (
-    <section id="patching-services" className="py-20 md:py-28 bg-white relative overflow-hidden scroll-mt-24">
+    <section id="patching" className="py-20 md:py-28 bg-white relative overflow-hidden scroll-mt-24">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[#00C9A7]/[0.04] blur-[120px]" />
         <div className="absolute bottom-1/3 left-0 w-[500px] h-[500px] rounded-full bg-[#DC2626]/[0.03] blur-[120px]" />
@@ -762,6 +760,125 @@ function PatchingServices() {
 }
 
 /* ════════════════════════════════════════════════════════════════
+   5B. WEEP SCREED AUTHORITY SECTION
+   ════════════════════════════════════════════════════════════════ */
+function WeepScreedAuthority() {
+  const educationCards = [
+    {
+      icon: <Droplets size={24} style={{ color: TEAL }} />,
+      title: "It's a Drain, Not a Trim Piece.",
+      copy: 'The L-shaped metal flashing at the base of your stucco wall is called a weep screed — and its job is to let water escape. It was never decorative. It was designed to be the last line of drainage for your entire wall assembly.',
+    },
+    {
+      icon: <AlertTriangle size={24} style={{ color: CRIMSON }} />,
+      title: 'The Problem.',
+      copy: 'When the weep screed is buried by landscaping, clogged with paint, or damaged by settling, water has nowhere to go. It backs up into the sill plate and framing — feeding mold, rot, and termites silently behind your walls.',
+    },
+    {
+      icon: <ClipboardCheck size={24} style={{ color: OCEAN }} />,
+      title: 'The Code.',
+      copy: 'California Residential Code R703.6.2.1 requires a minimum of 4″ clearance above earth and 2″ above paved surfaces at the weep screed. Most homes we inspect are in violation — and have been for years.',
+    },
+  ]
+
+  return (
+    <section id="weep-screed" className="py-20 md:py-28 bg-gray-50/80 relative overflow-hidden scroll-mt-24">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 right-0 w-[600px] h-[600px] rounded-full bg-[#DC2626]/[0.03] blur-[120px]" />
+        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full bg-[#0A2540]/[0.04] blur-[100px]" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+
+        {/* ─── Section Header ─── */}
+        <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-14">
+          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4" style={{ background: '#FEE2E2', color: CRIMSON }}>
+            Hidden Damage Alert
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight" style={{ color: OCEAN }}>
+            Mold. Rot. Termites.
+            <br />
+            <span className="text-red-500">It Starts at the Weep Screed.</span>
+          </h2>
+          <p className="mt-5 text-gray-600 text-lg leading-relaxed">
+            A failed weep screed traps water inside your walls. We cut out the damage and rebuild
+            the base of your wall to code.
+          </p>
+        </motion.div>
+
+        {/* Split layout: Image left, cards right */}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start mb-14">
+          {/* Left — damage image */}
+          <motion.div {...fadeUp(0.1)} className="relative group">
+            <div className="rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src="/stucco-damage.png"
+                alt="Weep screed rot damage showing water intrusion at wall base"
+                className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700"
+              />
+            </div>
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute bottom-4 left-4 right-4">
+              <div className="flex items-center gap-2 text-white">
+                <AlertTriangle size={18} className="text-red-400" />
+                <span className="text-sm font-medium">Weep screed failure — the #1 hidden cause of wall rot</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right — education cards */}
+          <div className="space-y-6">
+            {educationCards.map((card, i) => (
+              <motion.div
+                key={card.title}
+                {...fadeUp(0.15 + i * 0.1)}
+                className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: i === 1 ? '#FEE2E2' : `${TEAL}10` }}>
+                    {card.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold mb-2" style={{ color: OCEAN }}>{card.title}</h3>
+                    <p className="text-gray-600 leading-relaxed text-sm">{card.copy}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Bar */}
+        <motion.div {...fadeUp(0.4)}>
+          <div
+            className="rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5"
+            style={{ background: OCEAN }}
+          >
+            <div className="text-white text-center sm:text-left">
+              <span className="text-lg sm:text-xl font-bold">Is Your Weep Screed Buried or Damaged?</span>
+              <p className="text-white/60 text-sm mt-1">Free on-site inspection. We measure clearance and check for hidden rot.</p>
+            </div>
+            <div className="flex flex-col sm:flex-row items-center gap-3">
+              <a
+                href="#assessment"
+                className="px-6 py-3 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)] whitespace-nowrap"
+                style={{ background: TEAL }}
+              >
+                Get Free Weep Screed Inspection
+              </a>
+              <a href="tel:7149367013" className="text-white font-bold text-sm flex items-center gap-1.5 whitespace-nowrap hover:text-[#00C9A7] transition-colors">
+                <Phone size={15} />
+                714-936-7013
+              </a>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+/* ════════════════════════════════════════════════════════════════
    CTA BANNER (pre-footer)
    ════════════════════════════════════════════════════════════════ */
 function PreFooterCTA() {
@@ -853,7 +970,7 @@ function Footer() {
           <div>
             <h4 className="font-bold text-sm uppercase tracking-wider mb-5 text-white/80">Our Services</h4>
             <ul className="space-y-3">
-              {['Stucco Repair', 'Stucco Patches', 'Weep Screed Repair', 'Smooth Stucco'].map((s) => (
+              {['Stucco Repair', 'Stucco Patches', 'Weep Screed Repair'].map((s) => (
                 <li key={s}>
                   <a href="#" className="text-white/60 hover:text-[#00C9A7] transition-colors text-sm flex items-center gap-2">
                     <span className="w-1 h-1 rounded-full bg-[#00C9A7]" />
@@ -1095,6 +1212,7 @@ export default function Home() {
         <HiddenDanger />
         <HowItWorks />
         <PatchingServices />
+        <WeepScreedAuthority />
         <Assessment />
         <PreFooterCTA />
       </main>
