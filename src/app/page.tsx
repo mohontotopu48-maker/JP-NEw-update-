@@ -30,11 +30,14 @@ import {
   Wrench,
   Droplets,
   Layers,
+  Camera,
+  MessageSquare,
 } from 'lucide-react'
 
 /* ── colour tokens ── */
 const OCEAN = '#0A2540'
 const TEAL = '#00C9A7'
+const CRIMSON = '#DC2626'
 const TEAL_GLOW = '0 0 24px rgba(0,201,167,.45)'
 
 /* ── animation helpers ── */
@@ -108,8 +111,9 @@ function Header() {
 
           {/* Services dropdown */}
           <div ref={servicesRef} className="relative">
-            <button
-              onClick={() => { setServicesOpen(!servicesOpen); setActiveLink('Services') }}
+            <a
+              href="#patching-services"
+              onClick={() => { setServicesOpen(false); setActiveLink('Services') }}
               className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeLink === 'Services'
                   ? 'text-[#00C9A7]'
@@ -118,31 +122,7 @@ function Header() {
               style={activeLink === 'Services' ? { textShadow: TEAL_GLOW } : undefined}
             >
               Services
-              <ChevronDown size={14} className={`transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
-            </button>
-
-            <AnimatePresence>
-              {servicesOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute top-full right-0 mt-2 w-56 rounded-xl bg-white shadow-2xl border border-gray-100 overflow-hidden"
-                >
-                  {['Stucco Repair', 'Stucco Patches', 'Weep Screed Repair', 'Smooth Stucco'].map((item) => (
-                    <a
-                      key={item}
-                      href="#"
-                      className="flex items-center gap-2 px-5 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#00C9A7] transition-colors"
-                    >
-                      <CheckCircle2 size={14} className="text-[#00C9A7]" />
-                      {item}
-                    </a>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+            </a>
           </div>
         </nav>
 
@@ -190,15 +170,13 @@ function Header() {
                   {link}
                 </button>
               ))}
-              <button
-                onClick={() => setActiveLink('Services')}
-                className="block w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-white/80"
+              <a
+                href="#patching-services"
+                onClick={() => setMobileOpen(false)}
+                className="block w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-white/80 hover:text-[#00C9A7]"
               >
-                Services ▾
-              </button>
-              {['Stucco Repair', 'Stucco Patches', 'Weep Screed Repair', 'Smooth Stucco'].map((s) => (
-                <a key={s} href="#" className="block pl-8 py-2 text-sm text-white/60 hover:text-[#00C9A7]">{s}</a>
-              ))}
+                Services
+              </a>
               <div className="pt-3 border-t border-white/10 space-y-3">
                 <a href="tel:7149367013" className="flex items-center gap-2 text-white font-bold text-sm px-4">
                   <Phone size={15} /> 714-936-7013
@@ -514,6 +492,214 @@ function HowItWorks() {
           </a>
           <p className="mt-4 text-sm text-gray-400">No obligation · Onsite walkthrough · Same-day callback</p>
         </motion.div>
+      </div>
+    </section>
+  )
+}
+
+/* ════════════════════════════════════════════════════════════════
+   5A. STUCCO PATCHING SERVICES
+   ════════════════════════════════════════════════════════════════ */
+function PatchingServices() {
+  const cosmeticBullets = ['Hairline cracks', 'Surface chips', 'Chalky spots', 'Settlement cracks']
+  const structuralBullets = ['Holes showing framing/paper', 'Impact damage', 'Utility cutouts', 'Rusted lath', 'Plumbing removals']
+
+  const patchRightItems = [
+    { icon: <CheckCircle2 size={18} className="text-[#00C9A7]" />, text: 'Single crack or hole (< 2 sqft)' },
+    { icon: <CheckCircle2 size={18} className="text-[#00C9A7]" />, text: 'Utility cutout' },
+    { icon: <CheckCircle2 size={18} className="text-[#00C9A7]" />, text: 'Isolated impact' },
+  ]
+  const fullRepairItems = [
+    { icon: <AlertTriangle size={18} className="text-red-500" />, text: 'Multiple damaged areas' },
+    { icon: <AlertTriangle size={18} className="text-red-500" />, text: 'Water damage behind stucco' },
+    { icon: <AlertTriangle size={18} className="text-red-500" />, text: 'Widespread cracking' },
+    { icon: <AlertTriangle size={18} className="text-red-500" />, text: 'Delamination / bubbling' },
+  ]
+
+  return (
+    <section id="patching-services" className="py-20 md:py-28 bg-white relative overflow-hidden scroll-mt-24">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[#00C9A7]/[0.04] blur-[120px]" />
+        <div className="absolute bottom-1/3 left-0 w-[500px] h-[500px] rounded-full bg-[#DC2626]/[0.03] blur-[120px]" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+
+        {/* ─── 1. Section Header ─── */}
+        <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight" style={{ color: OCEAN }}>
+            Stucco Patching Services
+          </h2>
+          <p className="mt-5 text-gray-600 text-lg leading-relaxed">
+            Hairline cracks, utility cutouts, impact damage — our patching crew fixes localized problems
+            without re-stuccoing entire walls. Two types of patches, one clear recommendation after a
+            free on-site inspection.
+          </p>
+        </motion.div>
+
+        {/* Action Bar */}
+        <motion.div {...fadeUp(0.1)} className="flex flex-col items-center gap-4 mb-16">
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <a
+              href="#assessment"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)]"
+              style={{ background: TEAL }}
+            >
+              GET FREE ASSESSMENT
+              <ArrowRight size={18} />
+            </a>
+            <span className="text-gray-500 text-sm">
+              Or call: <a href="tel:6573005675" className="font-semibold hover:text-[#00C9A7] transition-colors" style={{ color: OCEAN }}>(657) 300-5675</a>
+            </span>
+          </div>
+          <a
+            href="sms:6573005675"
+            className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-[#00C9A7] transition-colors group"
+          >
+            <Camera size={16} className="group-hover:scale-110 transition-transform" />
+            <span>Text us a photo of your damage for a quick estimate</span>
+          </a>
+        </motion.div>
+
+        {/* ─── 2. The Comparison Grid ─── */}
+        <motion.div {...fadeUp(0.15)} className="text-center mb-10">
+          <h3 className="text-2xl sm:text-3xl font-extrabold" style={{ color: OCEAN }}>
+            Cosmetic vs. Structural
+          </h3>
+          <p className="mt-2 text-gray-500 text-base">Two Types of Stucco Patches — and Why It Matters.</p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-16">
+          {/* Left Column — Cosmetic */}
+          <motion.div {...fadeUp(0.2)} className="bg-white rounded-2xl border-2 border-gray-100 shadow-sm p-7 lg:p-8 hover:shadow-md transition-all duration-300">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: `${TEAL}10` }}>
+                <Palette size={24} style={{ color: TEAL }} />
+              </div>
+              <div>
+                <h4 className="text-xl font-bold" style={{ color: OCEAN }}>Cosmetic Stucco Patch</h4>
+                <span className="text-xs font-bold tracking-widest uppercase" style={{ color: TEAL }}>Surface Only</span>
+              </div>
+            </div>
+            <p className="text-gray-600 leading-relaxed text-[15px] mb-6">
+              A skim repair of the finish coat — no cutting into the wall, no new lath. We clean and key the
+              surface, fill the damage with matched stucco material, and float the texture back in so the
+              repair blends with the surrounding wall.
+            </p>
+            <ul className="space-y-3">
+              {cosmeticBullets.map((b) => (
+                <li key={b} className="flex items-center gap-3 text-gray-700 text-sm">
+                  <CheckCircle2 size={16} style={{ color: TEAL }} className="shrink-0" />
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Right Column — Structural (highlighted crimson) */}
+          <motion.div {...fadeUp(0.25)} className="bg-white rounded-2xl border-2 shadow-sm p-7 lg:p-8 hover:shadow-lg transition-all duration-300 relative" style={{ borderColor: CRIMSON }}>
+            {/* Recommended badge */}
+            <div className="absolute -top-3.5 right-6 px-4 py-1 rounded-full text-xs font-bold text-white" style={{ background: CRIMSON }}>
+              RECOMMENDED
+            </div>
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: '#FEE2E2' }}>
+                <Shield size={24} style={{ color: CRIMSON }} />
+              </div>
+              <div>
+                <h4 className="text-xl font-bold" style={{ color: OCEAN }}>Stucco Patching with Lath</h4>
+                <span className="text-xs font-bold tracking-widest uppercase" style={{ color: CRIMSON }}>Full-Depth Repair</span>
+              </div>
+            </div>
+            <p className="text-gray-600 leading-relaxed text-[15px] mb-6">
+              A full one-coat system rebuild. We cut back to healthy stucco, strip out old rusted wire,
+              install new galvanized lath, and apply fiber-reinforced stucco to rebuild the wall monolithically.
+            </p>
+            <ul className="space-y-3">
+              {structuralBullets.map((b) => (
+                <li key={b} className="flex items-center gap-3 text-gray-700 text-sm">
+                  <CheckCircle2 size={16} style={{ color: CRIMSON }} className="shrink-0" />
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+
+        {/* ─── 3. Smooth Stucco Warning ─── */}
+        <motion.div {...fadeUp(0.3)} className="mb-16">
+          <div className="rounded-2xl border-2 p-6 sm:p-8" style={{ background: '#FFF1F2', borderColor: CRIMSON }}>
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ background: '#FEE2E2' }}>
+                <AlertTriangle size={22} style={{ color: CRIMSON }} />
+              </div>
+              <div>
+                <h4 className="font-bold text-base mb-2" style={{ color: CRIMSON }}>Smooth Stucco — No Patches.</h4>
+                <p className="text-gray-700 text-sm leading-relaxed">
+                  Smooth finish stucco cannot be patched — localized repairs will always be visible. For
+                  smooth stucco, we re-stucco the entire wall plane for a uniform finish.{' '}
+                  <a href="#" className="font-semibold hover:underline" style={{ color: CRIMSON }}>
+                    Learn about smooth stucco services →
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ─── 4. Patch vs. Full Repair Logic Table ─── */}
+        <motion.div {...fadeUp(0.35)} className="mb-16">
+          <div className="rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+            {/* Table Header */}
+            <div className="grid grid-cols-2">
+              <div className="p-5 sm:p-6 text-center" style={{ background: `${TEAL}10` }}>
+                <span className="text-sm sm:text-base font-bold" style={{ color: OCEAN }}>Patching is right when…</span>
+              </div>
+              <div className="p-5 sm:p-6 text-center" style={{ background: '#FEE2E2' }}>
+                <span className="text-sm sm:text-base font-bold" style={{ color: OCEAN }}>Full repair is better when…</span>
+              </div>
+            </div>
+            {/* Table Body */}
+            <div className="grid grid-cols-2 divide-x divide-gray-100">
+              <div className="p-5 sm:p-6 space-y-4">
+                {patchRightItems.map((item) => (
+                  <div key={item.text} className="flex items-start gap-3">
+                    {item.icon}
+                    <span className="text-gray-700 text-sm">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="p-5 sm:p-6 space-y-4">
+                {fullRepairItems.map((item) => (
+                  <div key={item.text} className="flex items-start gap-3">
+                    {item.icon}
+                    <span className="text-gray-700 text-sm">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ─── 5. Final Bottom CTA ─── */}
+        <motion.div {...fadeUp(0.4)} className="text-center">
+          <h3 className="text-2xl sm:text-3xl font-extrabold mb-3" style={{ color: OCEAN }}>
+            Not Sure What You Need?
+          </h3>
+          <p className="text-gray-500 text-base max-w-xl mx-auto mb-8">
+            We&apos;ll inspect the damage for free and recommend the most cost-effective solution — patch,
+            repair, or re-stucco.
+          </p>
+          <a
+            href="#assessment"
+            className="inline-flex items-center gap-2 px-10 py-4 rounded-full text-base font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)]"
+            style={{ background: TEAL }}
+          >
+            GET FREE ASSESSMENT
+            <ArrowRight size={18} />
+          </a>
+        </motion.div>
+
       </div>
     </section>
   )
@@ -852,6 +1038,7 @@ export default function Home() {
         <Hero />
         <HiddenDanger />
         <HowItWorks />
+        <PatchingServices />
         <Assessment />
         <PreFooterCTA />
       </main>
