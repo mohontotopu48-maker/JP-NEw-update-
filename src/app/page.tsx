@@ -76,19 +76,6 @@ function Header() {
       className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled ? 'shadow-lg' : ''}`}
       style={{ background: OCEAN }}
     >
-      {/* Top contact strip — hides on scroll */}
-      <div className={`hidden md:flex items-center justify-end max-w-7xl mx-auto px-6 text-sm text-white/70 gap-4 transition-all duration-300 overflow-hidden ${scrolled ? 'h-0 py-0' : 'h-8 py-1.5'}`}>
-        <span className="flex items-center gap-1.5">
-          <MapPin size={14} />
-          Serving the OC Coast
-        </span>
-        <span className="text-white/40">|</span>
-        <a href="tel:7149367013" className="flex items-center gap-1.5 font-semibold text-white hover:text-[#00C9A7] transition-colors">
-          <Phone size={14} />
-          714-936-7013
-        </a>
-      </div>
-
       {/* Main nav row */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between transition-all duration-300" style={{ height: scrolled ? '60px' : '72px' }}>
         {/* Logo */}
