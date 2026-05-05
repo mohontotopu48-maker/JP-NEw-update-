@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Phone,
@@ -16,16 +16,16 @@ import {
   Menu,
   X,
   Star,
-  Home,
+  Home as HomeIcon,
   AlertTriangle,
   CheckCircle2,
   ArrowRight,
   Calculator,
   Palette,
   BookOpen,
-  Clock,
-  ThumbsUp,
   Eye,
+  BadgeCheck,
+  Search,
 } from 'lucide-react'
 
 /* ── colour tokens ── */
@@ -42,7 +42,7 @@ const fadeUp = (delay = 0) => ({
 })
 
 /* ════════════════════════════════════════════════════════════════
-   1. HEADER
+   1. PERSISTENT OCEAN BLUE HEADER
    ════════════════════════════════════════════════════════════════ */
 function Header() {
   const [servicesOpen, setServicesOpen] = useState(false)
@@ -120,7 +120,7 @@ function Header() {
             <button
               onClick={() => { setServicesOpen(!servicesOpen); setActiveLink('Services') }}
               className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                activeLink === 'Services' && !servicesOpen
+                activeLink === 'Services'
                   ? 'text-[#00C9A7]'
                   : 'text-white/80 hover:text-white'
               }`}
@@ -229,7 +229,7 @@ function Header() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   2. HERO SECTION
+   2. THE MODERN HERO (SPLIT-SCREEN)
    ════════════════════════════════════════════════════════════════ */
 function Hero() {
   return (
@@ -244,75 +244,41 @@ function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left — copy */}
           <div>
-            <motion.div {...fadeUp(0)}>
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#0A2540]/5 text-[#0A2540] mb-6">
-                <Star size={14} className="text-[#00C9A7]" />
-                5.0★ Google Rating · 3,500+ Homes
-              </span>
-            </motion.div>
-
-            <motion.h1 {...fadeUp(0.1)} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">
-              <span style={{ color: OCEAN }}>Orange County&apos;s</span>
+            <motion.h1 {...fadeUp(0)} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">
+              <span style={{ color: OCEAN }}>Stucco Repair</span>
               <br />
-              <span style={{ color: TEAL }}>Most Referred Stucco Pro.</span>
+              <span style={{ color: TEAL }}>Done Right.</span>
             </motion.h1>
 
-            <motion.p {...fadeUp(0.2)} className="mt-6 text-lg text-gray-600 leading-relaxed max-w-xl">
-              Permanent, high-end stucco restoration for the OC Coast. We identify the root cause
-              to ensure your home is protected for the long haul.
+            <motion.p {...fadeUp(0.1)} className="mt-6 text-lg text-gray-600 leading-relaxed max-w-xl">
+              Permanent, high-end stucco restoration for the OC Coast. We find the hidden cause,
+              fix it permanently, and ensure your home is protected for the long haul.
             </motion.p>
 
-            <motion.div {...fadeUp(0.3)} className="mt-8 flex flex-wrap gap-4">
+            <motion.div {...fadeUp(0.2)} className="mt-8">
               <a
                 href="#"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)]"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)]"
                 style={{ background: TEAL }}
               >
-                Get Your Free Assessment
-                <ArrowRight size={16} />
+                BOOK FREE ASSESSMENT
+                <ArrowRight size={18} />
               </a>
-              <a
-                href="tel:7149367013"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border-2 transition-all duration-300 hover:bg-[#0A2540] hover:text-white hover:border-[#0A2540]"
-                style={{ color: OCEAN, borderColor: OCEAN }}
-              >
-                <Phone size={16} />
-                714-936-7013
-              </a>
-            </motion.div>
-
-            {/* Metrics */}
-            <motion.div {...fadeUp(0.4)} className="mt-10 flex flex-wrap gap-8">
-              {[
-                { value: '3,500+', label: 'Homes Repaired', icon: <Home size={16} className="text-[#00C9A7]" /> },
-                { value: '5.0★', label: 'Google Rating', icon: <Star size={16} className="text-[#00C9A7]" /> },
-                { value: '100%', label: 'Root Cause Fix', icon: <Shield size={16} className="text-[#00C9A7]" /> },
-              ].map((m) => (
-                <div key={m.label} className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-full bg-[#00C9A7]/10 flex items-center justify-center">
-                    {m.icon}
-                  </div>
-                  <div>
-                    <div className="text-xl font-extrabold" style={{ color: TEAL }}>{m.value}</div>
-                    <div className="text-xs text-gray-500">{m.label}</div>
-                  </div>
-                </div>
-              ))}
             </motion.div>
           </div>
 
-          {/* Right — hero image with play button */}
+          {/* Right — video thumbnail with play button */}
           <motion.div {...fadeUp(0.15)} className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
               <img
                 src="/hero-home.png"
-                alt="Beautiful Mediterranean stucco home on the Orange County coast"
+                alt="Luxury coastal Orange County stucco home"
                 className="w-full h-auto object-cover aspect-[16/9] group-hover:scale-[1.03] transition-transform duration-700"
               />
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
 
-              {/* Play button */}
+              {/* Play button — white circle with teal triangle */}
               <button
                 className="absolute inset-0 flex items-center justify-center group/play"
                 aria-label="Play video testimonial"
@@ -328,7 +294,7 @@ function Hero() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.6, duration: 0.5 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
               className="absolute -bottom-4 -right-2 sm:right-4 bg-white rounded-xl shadow-lg px-4 py-3 flex items-center gap-3 border border-gray-100"
             >
               <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: `${TEAL}15` }}>
@@ -339,85 +305,55 @@ function Hero() {
                 <div className="text-xs text-gray-500">Root Cause Method</div>
               </div>
             </motion.div>
-
-            {/* Floating badge — video */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute top-4 -left-2 sm:left-4 bg-white rounded-xl shadow-lg px-4 py-3 flex items-center gap-3 border border-gray-100"
-            >
-              <div className="w-10 h-10 rounded-full flex items-center justify-center bg-red-50">
-                <Play size={18} className="text-red-500" />
-              </div>
-              <div>
-                <div className="text-sm font-bold" style={{ color: OCEAN }}>Watch Video</div>
-                <div className="text-xs text-gray-500">Homeowner Stories</div>
-              </div>
-            </motion.div>
           </motion.div>
         </div>
-      </div>
-    </section>
-  )
-}
 
-/* ════════════════════════════════════════════════════════════════
-   SOCIAL PROOF BAR
-   ════════════════════════════════════════════════════════════════ */
-function SocialProofBar() {
-  const stats = [
-    { icon: <Home size={20} />, value: '3,500+', label: 'Homes Repaired' },
-    { icon: <Star size={20} />, value: '5.0★', label: 'Google Rating' },
-    { icon: <Clock size={20} />, value: '20+ Years', label: 'OC Experience' },
-    { icon: <ThumbsUp size={20} />, value: '100%', label: 'Satisfaction' },
-  ]
-
-  return (
-    <section className="py-8 border-y border-gray-100 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              {...fadeUp(i * 0.08)}
-              className="flex items-center gap-3"
+        {/* Metric Bar — Four clean white cards */}
+        <motion.div {...fadeUp(0.3)} className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { icon: <HomeIcon size={22} style={{ color: OCEAN }} />, value: '3,500+', label: 'Homes Repaired' },
+            { icon: <Search size={22} style={{ color: OCEAN }} />, value: 'Root-Cause', label: 'Fix Method' },
+            { icon: <BadgeCheck size={22} style={{ color: OCEAN }} />, value: 'Licensed', label: '& Insured' },
+            { icon: <Star size={22} style={{ color: OCEAN }} />, value: '5.0★', label: 'Google Rating' },
+          ].map((m) => (
+            <div
+              key={m.label}
+              className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex items-center gap-3 hover:shadow-md hover:border-[#00C9A7]/20 transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: `${TEAL}10`, color: TEAL }}>
-                {s.icon}
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: `${TEAL}10` }}>
+                {m.icon}
               </div>
               <div>
-                <div className="text-lg font-extrabold" style={{ color: OCEAN }}>{s.value}</div>
-                <div className="text-xs text-gray-500">{s.label}</div>
+                <div className="text-lg font-extrabold" style={{ color: OCEAN }}>{m.value}</div>
+                <div className="text-xs text-gray-500">{m.label}</div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )
 }
 
 /* ════════════════════════════════════════════════════════════════
-   3. HIDDEN DANGER SECTION
+   3. THE "HIDDEN DANGER" DEEP-DIVE
    ════════════════════════════════════════════════════════════════ */
 function HiddenDanger() {
   const dangerPoints = [
     {
-      icon: <AlertTriangle size={24} className="text-red-500" />,
-      title: 'Destroyed Paper Barrier',
+      icon: <AlertTriangle size={22} className="text-red-500" />,
+      title: 'Shredded Moisture Barriers',
       copy: 'Behind your stucco sits a paper moisture barrier — and it\'s shredding. Years of coastal humidity and rain seep through tiny cracks, causing the paper to deteriorate, tear, and literally disintegrate. Once the paper goes, your home\'s first line of defense is gone.',
     },
     {
-      icon: <AlertTriangle size={24} className="text-amber-500" />,
-      title: 'Toxic Mold on Your Studs',
-      copy: 'When moisture breaches the barrier, black mold blooms across the wood studs inside your walls. It spreads silently — you won\'t see it, but your family breathes it. Mold remediation alone can cost tens of thousands, and it keeps coming back until the stucco is fixed right.',
+      icon: <AlertTriangle size={22} className="text-amber-500" />,
+      title: 'Silent Black Mold Growth',
+      copy: 'When moisture breaches the barrier, black mold blooms silently across the wood studs inside your walls. You won\'t see it, but your family breathes it. Mold remediation alone can cost tens of thousands, and it keeps coming back until the stucco is fixed right.',
     },
     {
-      icon: <AlertTriangle size={24} className="text-orange-500" />,
+      icon: <AlertTriangle size={22} className="text-orange-500" />,
       title: 'The Insurance Denial Trap',
-      copy: 'Here\'s what most homeowners don\'t know: long-term neglect and gradual deterioration are standard exclusion clauses in nearly every homeowner\'s policy. The longer you wait, the more likely your claim gets denied — and you\'re left holding the entire bill.',
+      copy: 'Long-term neglect and gradual deterioration are standard exclusion clauses in nearly every homeowner\'s policy. The longer you wait, the more likely your claim gets denied — and you\'re left holding the entire bill out of pocket.',
     },
   ]
 
@@ -434,42 +370,49 @@ function HiddenDanger() {
             <br />
             <span className="text-red-500">Hiding Behind Your Stucco.</span>
           </h2>
-          <p className="mt-4 text-gray-500 text-lg">
-            What you can&apos;t see will hurt you — and your wallet.
-          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {dangerPoints.map((pt, i) => (
-            <motion.div
-              key={pt.title}
-              {...fadeUp(i * 0.12)}
-              className="bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-lg hover:border-red-100 transition-all duration-300 group"
-            >
-              <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
-                {pt.icon}
-              </div>
-              <h3 className="text-lg font-bold mb-3" style={{ color: OCEAN }}>{pt.title}</h3>
-              <p className="text-gray-600 leading-relaxed text-[15px]">{pt.copy}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Damage visual */}
-        <motion.div {...fadeUp(0.3)} className="mt-14 rounded-2xl overflow-hidden shadow-lg max-w-4xl mx-auto relative group">
-          <img
-            src="/stucco-damage.png"
-            alt="Hidden water damage and mold behind stucco walls"
-            className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-6">
-            <div className="flex items-center gap-2 text-white">
-              <Eye size={18} className="text-[#00C9A7]" />
-              <span className="text-sm font-medium">See what&apos;s really behind your walls</span>
+        {/* Split layout: Image left, text right */}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          {/* Left — damage image */}
+          <motion.div {...fadeUp(0.1)} className="relative group">
+            <div className="rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src="/stucco-damage.png"
+                alt="Cut-away wall showing water damage and mold behind stucco"
+                className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700"
+              />
             </div>
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute bottom-4 left-4 right-4">
+              <div className="flex items-center gap-2 text-white">
+                <Eye size={18} className="text-[#00C9A7]" />
+                <span className="text-sm font-medium">See what&apos;s really behind your walls</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right — danger text */}
+          <div className="space-y-6">
+            {dangerPoints.map((pt, i) => (
+              <motion.div
+                key={pt.title}
+                {...fadeUp(0.15 + i * 0.1)}
+                className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-red-100 transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center shrink-0 mt-0.5">
+                    {pt.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold mb-2" style={{ color: OCEAN }}>{pt.title}</h3>
+                    <p className="text-gray-600 leading-relaxed text-sm">{pt.copy}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* CTA Bar */}
         <motion.div {...fadeUp(0.4)}>
@@ -502,7 +445,7 @@ function HiddenDanger() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   4. HOW IT WORKS — 3-STEP PROCESS
+   4. THE COASTAL PROCESS (3-STEP PLAN)
    ════════════════════════════════════════════════════════════════ */
 function HowItWorks() {
   const steps = [
@@ -510,21 +453,21 @@ function HowItWorks() {
       num: '01',
       icon: <ClipboardCheck size={28} />,
       title: 'Free Walkthrough',
-      copy: 'Send a photo or schedule an onsite walkthrough. We identify the root cause — not just the symptoms — so you know exactly what you\'re dealing with.',
+      copy: 'Schedule an onsite coastal walkthrough to identify the root cause. We don\'t guess — we inspect, so you know exactly what you\'re dealing with.',
       accent: TEAL,
     },
     {
       num: '02',
       icon: <Shield size={28} />,
       title: 'Get Your Estimate',
-      copy: 'Receive a detailed, fixed-price estimate with zero hidden fees. You\'ll know the full scope, timeline, and cost before we start. No surprises.',
+      copy: 'A detailed, fixed-price estimate with a clear, professional scope of work. Zero hidden fees — you\'ll know the full cost before we start.',
       accent: OCEAN,
     },
     {
       num: '03',
       icon: <Hammer size={28} />,
       title: 'We Get It Done',
-      copy: 'On-time completion. Fast, clean, and built to last. Every project backed by our commitment to permanent results that protect your home for decades.',
+      copy: 'On-time completion, fast, clean, and built to last. Every project backed by our commitment to permanent results that protect your home for decades.',
       accent: TEAL,
     },
   ]
@@ -537,10 +480,6 @@ function HowItWorks() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div {...fadeUp()} className="text-center max-w-2xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-4" style={{ background: `${TEAL}10`, color: TEAL }}>
-            <Home size={14} />
-            Simple Process
-          </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold" style={{ color: OCEAN }}>
             How It Works.
           </h2>
@@ -579,10 +518,10 @@ function HowItWorks() {
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)]"
             style={{ background: TEAL }}
           >
-            Start Your Free Walkthrough
+            BOOK FREE ASSESSMENT
             <ArrowRight size={18} />
           </a>
-          <p className="mt-4 text-sm text-gray-400">No obligation · Free photo review · Same-day callback</p>
+          <p className="mt-4 text-sm text-gray-400">No obligation · Onsite walkthrough · Same-day callback</p>
         </motion.div>
       </div>
     </section>
@@ -610,10 +549,10 @@ function PreFooterCTA() {
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)]"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)]"
               style={{ background: TEAL }}
             >
-              Get Free Assessment
+              BOOK FREE ASSESSMENT
               <ArrowRight size={18} />
             </a>
             <a
@@ -631,7 +570,7 @@ function PreFooterCTA() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   5. FOOTER
+   5. ARCHITECTURAL OC COASTAL FOOTER
    ════════════════════════════════════════════════════════════════ */
 function Footer() {
   const ocCoastCities = ['Newport Beach', 'Huntington Beach', 'Seal Beach', 'Costa Mesa', 'Corona del Mar', 'Newport Coast']
@@ -639,10 +578,18 @@ function Footer() {
 
   return (
     <footer style={{ background: OCEAN }} className="text-white">
-      {/* Main footer grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-8">
+
+        {/* Centered tagline */}
+        <div className="text-center mb-12">
+          <p className="text-white/90 text-lg font-medium tracking-wide">
+            Expert Guide <span className="text-white/40 mx-2">|</span> Helping You Win
+          </p>
+        </div>
+
+        {/* Service & Resource Columns */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
-          {/* Col 1 — Brand */}
+          {/* Col 1 — Brand + social + address + serving badge */}
           <div>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden">
@@ -660,15 +607,22 @@ function Footer() {
                 </a>
               ))}
             </div>
-            <p className="text-white/50 text-sm leading-relaxed">
+            <p className="text-white/50 text-sm leading-relaxed mb-4">
               1100 Newport Center Dr, Suite 100<br />
               Newport Beach, CA 92660
             </p>
+            {/* Serving badge */}
+            <div className="flex items-center gap-2">
+              <MapPin size={16} style={{ color: TEAL }} />
+              <span className="text-sm font-medium" style={{ color: TEAL }}>
+                Serving the OC Coast for over 25 Years.
+              </span>
+            </div>
           </div>
 
-          {/* Col 2 — Services */}
+          {/* Col 2 — Our Services */}
           <div>
-            <h4 className="font-bold text-sm uppercase tracking-wider mb-5 text-white/80">Services</h4>
+            <h4 className="font-bold text-sm uppercase tracking-wider mb-5 text-white/80">Our Services</h4>
             <ul className="space-y-3">
               {['Stucco Repair', 'Stucco Patches', 'Weep Screed Repair', 'Smooth Stucco'].map((s) => (
                 <li key={s}>
@@ -681,14 +635,15 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Col 3 — Resources */}
+          {/* Col 3 — Tools & Guides */}
           <div>
-            <h4 className="font-bold text-sm uppercase tracking-wider mb-5 text-white/80">Resources</h4>
+            <h4 className="font-bold text-sm uppercase tracking-wider mb-5 text-white/80">Tools & Guides</h4>
             <ul className="space-y-3">
               {[
                 { label: 'Price Calculator', icon: <Calculator size={14} /> },
                 { label: 'Cost Guide', icon: <BookOpen size={14} /> },
                 { label: 'Color Visualizer', icon: <Palette size={14} /> },
+                { label: 'Weep Screed Assessment', icon: <Shield size={14} /> },
               ].map((r) => (
                 <li key={r.label}>
                   <a href="#" className="text-white/60 hover:text-[#00C9A7] transition-colors text-sm flex items-center gap-2">
@@ -721,8 +676,14 @@ function Footer() {
         {/* Divider */}
         <div className="border-t border-white/10 mt-12 mb-8" />
 
-        {/* Service Area Grid */}
-        <div className="grid sm:grid-cols-2 gap-8 max-w-3xl">
+        {/* SERVICE AREAS — ORANGE COUNTY COASTAL ONLY */}
+        <div className="mb-2">
+          <h5 className="text-center text-xs font-bold uppercase tracking-[0.2em] text-white/40 mb-8">
+            SERVICE AREAS — ORANGE COUNTY COASTAL ONLY
+          </h5>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
           <div>
             <h5 className="font-bold text-sm uppercase tracking-widest mb-4" style={{ color: TEAL }}>
               The OC Coast
@@ -778,7 +739,6 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <SocialProofBar />
         <HiddenDanger />
         <HowItWorks />
         <PreFooterCTA />
