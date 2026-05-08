@@ -290,7 +290,7 @@ function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left — copy */}
           <div>
-            <motion.h1 {...fadeUp(0)} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight">
+            <motion.h1 {...fadeUp(0)} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-serif leading-[1.08] tracking-tight">
               <span style={{ color: OCEAN }}>Stucco Repair</span>
               <br />
               <span style={{ color: TEAL }}>Done Right.</span>
@@ -414,7 +414,7 @@ function HiddenDanger() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-14">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight" style={{ color: OCEAN }}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif leading-tight" style={{ color: OCEAN }}>
             Destroyed Paper. Toxic Mold.
             <br />
             <span className="text-red-500">Hiding Behind Your Stucco.</span>
@@ -532,7 +532,7 @@ function HowItWorks() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div {...fadeUp()} className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold" style={{ color: OCEAN }}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif" style={{ color: OCEAN }}>
             How It Works.
           </h2>
           <p className="mt-4 text-gray-500 text-lg">
@@ -610,7 +610,7 @@ function PatchingServices() {
 
         {/* ─── 1. Section Header ─── */}
         <motion.div {...fadeUp()} className="text-center max-w-3xl mx-auto mb-6">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight" style={{ color: OCEAN }}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif leading-tight" style={{ color: OCEAN }}>
             Stucco Patching Services
           </h2>
           <p className="mt-5 text-gray-600 text-lg leading-relaxed">
@@ -824,7 +824,7 @@ function WeepScreedAuthority() {
           <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4" style={{ background: '#FEE2E2', color: CRIMSON }}>
             Hidden Damage Alert
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight" style={{ color: OCEAN }}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif leading-tight" style={{ color: OCEAN }}>
             Mold. Rot. Termites.
             <br />
             <span className="text-red-500">It Starts at the Weep Screed.</span>
@@ -922,7 +922,7 @@ function PreFooterCTA() {
       </div>
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
         <motion.div {...fadeUp()}>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif text-white leading-tight">
             Ready to Protect Your Home?
           </h2>
           <p className="mt-4 text-white/60 text-lg max-w-xl mx-auto">
@@ -1170,7 +1170,7 @@ function Assessment() {
           <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4" style={{ background: `${TEAL}15`, color: TEAL }}>
             Transparent Pricing
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold" style={{ color: OCEAN }}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif" style={{ color: OCEAN }}>
             Get Your Free Stucco Assessment
           </h2>
           <p className="mt-4 text-gray-500 text-lg max-w-xl mx-auto">

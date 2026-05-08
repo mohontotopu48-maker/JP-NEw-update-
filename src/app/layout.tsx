@@ -108,7 +108,7 @@ const jsonLd = {
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "5.0",
-    reviewCount: "3500",
+    reviewCount: "127",
   },
   serviceType: [
     "Stucco Repair",
