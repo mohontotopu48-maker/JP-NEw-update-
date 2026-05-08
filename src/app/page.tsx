@@ -37,7 +37,6 @@ const OCEAN = '#0A2540'
 const TEAL = '#00C9A7'
 const CRIMSON = '#DC2626'
 const TEAL_GLOW = '0 0 24px rgba(0,201,167,.45)'
-const CURRENT_YEAR = new Date().getFullYear()
 
 /* ── shared services list (DRY) ── */
 const SERVICES = [
@@ -299,6 +298,9 @@ function Hero() {
                 src="/hero-home.png"
                 alt="Luxury coastal Orange County stucco home"
                 className="w-full h-auto object-cover aspect-[16/9] group-hover:scale-[1.03] transition-transform duration-700"
+                width={800}
+                height={450}
+                loading="eager"
               />
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
@@ -406,6 +408,9 @@ function HiddenDanger() {
                 src="/stucco-damage.png"
                 alt="Cut-away wall showing water damage and mold behind stucco"
                 className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                loading="lazy"
+                width={800}
+                height={600}
               />
             </div>
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
@@ -817,6 +822,9 @@ function WeepScreedAuthority() {
                 src="/stucco-damage.png"
                 alt="Weep screed rot damage showing water intrusion at wall base"
                 className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                loading="lazy"
+                width={800}
+                height={600}
               />
             </div>
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />

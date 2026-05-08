@@ -1,7 +1,8 @@
 {
-  "name": "nextjs_tailwind_shadcn_ts",
-  "version": "0.2.0",
+  "name": "jp-stucco-repair",
+  "version": "1.0.0",
   "private": true,
+  "description": "JP Stucco Repair — Orange County's premier stucco restoration company landing page. Built with Next.js 16, TypeScript, Tailwind CSS, and Framer Motion.",
   "scripts": {
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
     "build": "next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
