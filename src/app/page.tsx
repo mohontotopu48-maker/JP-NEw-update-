@@ -26,12 +26,10 @@ import {
   Eye,
   BadgeCheck,
   Search,
-  DollarSign,
   Wrench,
   Droplets,
   Layers,
   Camera,
-  MessageSquare,
 } from 'lucide-react'
 
 /* ── colour tokens ── */
@@ -39,6 +37,14 @@ const OCEAN = '#0A2540'
 const TEAL = '#00C9A7'
 const CRIMSON = '#DC2626'
 const TEAL_GLOW = '0 0 24px rgba(0,201,167,.45)'
+const CURRENT_YEAR = new Date().getFullYear()
+
+/* ── shared services list (DRY) ── */
+const SERVICES = [
+  { label: 'Stucco Repair', href: '#hero' },
+  { label: 'Stucco Patches', href: '#patching' },
+  { label: 'Weep Screed Repair', href: '#weep-screed' },
+] as const
 
 /* ── animation helpers ── */
 const fadeUp = (delay = 0) => ({
@@ -82,7 +88,7 @@ function Header() {
       {/* Main nav row */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between transition-all duration-300" style={{ height: scrolled ? '60px' : '72px' }}>
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3 shrink-0">
+        <a href="#hero" className="flex items-center gap-3 shrink-0">
           <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
             <img src="/jp-logo.png" alt="JP Stucco Repair" className="w-full h-full object-cover" />
           </div>
@@ -113,6 +119,8 @@ function Header() {
           <div ref={servicesRef} className="relative">
             <button
               onClick={() => { setServicesOpen(!servicesOpen); setActiveLink('Services') }}
+              aria-haspopup="true"
+              aria-expanded={servicesOpen}
               className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeLink === 'Services'
                   ? 'text-[#00C9A7]'
@@ -133,11 +141,7 @@ function Header() {
                   transition={{ duration: 0.2 }}
                   className="absolute top-full right-0 mt-2 w-60 rounded-xl bg-white shadow-2xl border border-gray-100 overflow-hidden"
                 >
-                  {[
-                    { label: 'Stucco Repair', href: '#hero' },
-                    { label: 'Stucco Patches', href: '#patching' },
-                    { label: 'Weep Screed Repair', href: '#weep-screed' },
-                  ].map((item) => (
+                  {SERVICES.map((item) => (
                     <a
                       key={item.label}
                       href={item.href}
@@ -170,7 +174,7 @@ function Header() {
         </div>
 
         {/* Mobile hamburger */}
-        <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden text-white p-2">
+        <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden text-white p-2" aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
@@ -200,7 +204,9 @@ function Header() {
               ))}
               <button
                 onClick={() => setServicesOpen(!servicesOpen)}
-                className="block w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-white/80 hover:text-[#00C9A7] flex items-center gap-1"
+                aria-haspopup="true"
+                aria-expanded={servicesOpen}
+                className="w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-white/80 hover:text-[#00C9A7] flex items-center gap-1"
               >
                 Services
                 <ChevronDown size={14} className={`transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
@@ -214,11 +220,7 @@ function Header() {
                     transition={{ duration: 0.2 }}
                     className="overflow-hidden"
                   >
-                    {[
-                      { label: 'Stucco Repair', href: '#hero' },
-                      { label: 'Stucco Patches', href: '#patching' },
-                      { label: 'Weep Screed Repair', href: '#weep-screed' },
-                    ].map((item) => (
+                    {SERVICES.map((item) => (
                       <a
                         key={item.label}
                         href={item.href}
@@ -381,7 +383,7 @@ function HiddenDanger() {
   ]
 
   return (
-    <section className="py-20 md:py-28 bg-gray-50/80 relative overflow-hidden">
+    <section className="py-20 md:py-28 bg-gray-50/80 relative overflow-hidden scroll-mt-24">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-red-500/[0.03] blur-[150px]" />
       </div>
@@ -449,7 +451,7 @@ function HiddenDanger() {
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">
               <a
-                href="#"
+                href="#assessment"
                 className="px-6 py-3 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,201,167,.5)] whitespace-nowrap"
                 style={{ background: TEAL }}
               >
@@ -496,7 +498,7 @@ function HowItWorks() {
   ]
 
   return (
-    <section className="py-20 md:py-28 bg-white relative overflow-hidden">
+    <section className="py-20 md:py-28 bg-white relative overflow-hidden scroll-mt-24">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-[#00C9A7]/[0.04] blur-[120px]" />
       </div>
@@ -544,7 +546,7 @@ function HowItWorks() {
             BOOK FREE ASSESSMENT
             <ArrowRight size={18} />
           </a>
-          <p className="mt-4 text-sm text-gray-400">No obligation · Onsite walkthrough · Same-day callback</p>
+          <p className="mt-4 text-sm text-gray-500">No obligation · Onsite walkthrough · Same-day callback</p>
         </motion.div>
       </div>
     </section>
@@ -603,12 +605,12 @@ function PatchingServices() {
               <ArrowRight size={18} />
             </a>
             <span className="text-gray-500 text-sm">
-              Or call: <a href="tel:6573005675" className="font-semibold hover:text-[#00C9A7] transition-colors" style={{ color: OCEAN }}>(657) 300-5675</a>
+              Or call: <a href="tel:7149367013" className="font-semibold hover:text-[#00C9A7] transition-colors" style={{ color: OCEAN }}>714-936-7013</a>
             </span>
           </div>
           <a
-            href="sms:6573005675"
-            className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-[#00C9A7] transition-colors group"
+            href="sms:7149367013"
+            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-[#00C9A7] transition-colors group"
           >
             <Camera size={16} className="group-hover:scale-110 transition-transform" />
             <span>Text us a photo of your damage for a quick estimate</span>
@@ -692,9 +694,9 @@ function PatchingServices() {
                 <p className="text-gray-700 text-sm leading-relaxed">
                   Smooth finish stucco cannot be patched — localized repairs will always be visible. For
                   smooth stucco, we re-stucco the entire wall plane for a uniform finish.{' '}
-                  <a href="#" className="font-semibold hover:underline" style={{ color: CRIMSON }}>
-                    Learn about smooth stucco services →
-                  </a>
+                  <span className="font-semibold" style={{ color: CRIMSON }}>
+                    Ask us about re-stucco options →
+                  </span>
                 </p>
               </div>
             </div>
@@ -883,7 +885,7 @@ function WeepScreedAuthority() {
    ════════════════════════════════════════════════════════════════ */
 function PreFooterCTA() {
   return (
-    <section className="py-20 md:py-24 relative overflow-hidden" style={{ background: OCEAN }}>
+    <section className="py-20 md:py-24 relative overflow-hidden scroll-mt-24" style={{ background: OCEAN }}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-[#00C9A7]/10 blur-[100px]" />
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-[#00C9A7]/5 blur-[80px]" />
@@ -970,11 +972,15 @@ function Footer() {
           <div>
             <h4 className="font-bold text-sm uppercase tracking-wider mb-5 text-white/80">Our Services</h4>
             <ul className="space-y-3">
-              {['Stucco Repair', 'Stucco Patches', 'Weep Screed Repair'].map((s) => (
-                <li key={s}>
-                  <a href="#" className="text-white/60 hover:text-[#00C9A7] transition-colors text-sm flex items-center gap-2">
+              {[
+                { label: 'Stucco Repair', href: '#hero' },
+                { label: 'Stucco Patches', href: '#patching' },
+                { label: 'Weep Screed Repair', href: '#weep-screed' },
+              ].map((s) => (
+                <li key={s.label}>
+                  <a href={s.href} className="text-white/60 hover:text-[#00C9A7] transition-colors text-sm flex items-center gap-2">
                     <span className="w-1 h-1 rounded-full bg-[#00C9A7]" />
-                    {s}
+                    {s.label}
                   </a>
                 </li>
               ))}
