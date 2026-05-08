@@ -77,6 +77,28 @@ function Header() {
     return () => document.removeEventListener('mousedown', handler)
   }, [])
 
+  /* Close dropdown on Escape key */
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setServicesOpen(false)
+        setMobileOpen(false)
+      }
+    }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [])
+
+  /* Lock body scroll when mobile menu is open */
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [mobileOpen])
+
   const navLinks = ['Residential', 'Commercial', 'Blog', 'Guides']
 
   return (
@@ -89,7 +111,7 @@ function Header() {
         {/* Logo */}
         <a href="#hero" className="flex items-center gap-3 shrink-0">
           <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
-            <img src="/jp-logo.png" alt="JP Stucco Repair" className="w-full h-full object-cover" />
+            <img src="/jp-logo.png" alt="JP Stucco Repair" className="w-full h-full object-cover" width={40} height={40} />
           </div>
           <div className="hidden sm:block">
             <span className="text-white font-bold text-lg leading-none">JP Stucco</span>
@@ -953,7 +975,7 @@ function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden">
-                <img src="/jp-logo.png" alt="JP Stucco Repair" className="w-full h-full object-cover" />
+                <img src="/jp-logo.png" alt="JP Stucco Repair" className="w-full h-full object-cover" width={40} height={40} />
               </div>
               <div>
                 <span className="font-bold text-lg leading-none">JP Stucco</span>
